@@ -44,11 +44,20 @@ const Board = () => {
     setIsX(!isX);
   }
 
+  const handleReset=()=>{
+    setSquares(Array(9).fill(null))
+    setIsX(true)
+    
+  }
+
   const winner = calculateWinner(squares);
   let status;
   if (winner) {
     status = winner + " is winner";
-  } else {
+  }else if(squares.every((e)=>e!==null)){
+      status="It's a tie"
+  }
+  else {
     status =   (isX ? "X" : "O") + "'s Turn ";
   }
 
@@ -76,6 +85,9 @@ const Board = () => {
       <Square setSymbol={()=>handleButton(8)} symbol={squares[8]}/>
     </div>
     </div>
+    <button className='bg-pink-200 rounded-md px-2 m-2 text-pink-950 text-lg' onClick={handleReset}>
+      reset
+    </button>
     </div>
   )
 }
